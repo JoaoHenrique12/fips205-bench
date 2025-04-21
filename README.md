@@ -21,6 +21,7 @@ For each test the Dockerfile is limited to use 1GB of RAM and 1 vCPU.
 Contains the inputs used to run tests and a python file to generate this inputs.
 
 ### Each Folder With an **AlgorithmName** Contains:
+
 - One or more inplementations and its respective Dockerfile
   - Graph to Sign/Verify one message
     - Graph bytes input x time spend to Sign one Message
@@ -32,3 +33,10 @@ Contains the inputs used to run tests and a python file to generate this inputs.
     - Graph N messages x time spend to Verify N Message
     - Graph N messages x memory spend to Sign N Message
     - Graph N messages x memory spend to Verify N Message
+
+
+Profiling tools for each language are configured to retrieve the amount of memory and execution time
+for each test. This tools are activated in different runs because profiling memory may interfere in
+execution time and profiling time may interfere in memory.
+Reference: [go-diagnostics](https://go.dev/doc/diagnostics)
+
