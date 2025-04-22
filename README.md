@@ -16,7 +16,7 @@ For each test the Dockerfile is limited to use 1GB of RAM and 1 vCPU.
 
 ## Repository Structure
 
-### inputs
+### [inputs](inputs/)
 
 Contains the inputs used to run tests and the python file used to generate this inputs.
 All files lorem-*.txt are read only to avoid their acidentally deletion.
@@ -25,7 +25,9 @@ All files lorem-*.txt are read only to avoid their acidentally deletion.
 sudo chmod 444 lorem-*
 ```
 
-### Each Folder With an **AlgorithmName** Contains:
+### [algorithms](algorithms/)
+
+#### Each Folder With an **AlgorithmName** Contains:
 
 - F folders named: language-username, one fore each implementation
   - F git repositories, one for each implementation of AlgorithmName
