@@ -40,6 +40,7 @@ sudo chmod 444 lorem-*
       - Graph N messages x time spend to Verify N Message
       - Graph N messages x memory spend to Sign N Message
       - Graph N messages x memory spend to Verify N Message
+    - One folder called logs to save information about each runned test
   - One json file called metadata.json, e.g.
   ```json
   {
