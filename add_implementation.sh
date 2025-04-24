@@ -86,4 +86,8 @@ metadata_file=algorithms/$algorithmName/"$languageImplemented-$gitUser"/metadata
 jq ".git_link = \"$gitRepositoryLink\"" "$metadata_file" > tmp.json && mv tmp.json "$metadata_file"
 jq ".branch = \"$mainBranch\"" "$metadata_file" > tmp.json && mv tmp.json "$metadata_file"
 
+# Clone repository
+
+git clone $gitRepositoryLink algorithms/$algorithmName/"$languageImplemented-$gitUser"/git-repository/
+
 exit 0
