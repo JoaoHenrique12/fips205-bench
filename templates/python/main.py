@@ -2,12 +2,12 @@ import os
 from typing import Any
 #import tracemalloc #HACK: bench_mem
 
-def sign_message(message: str) -> Any:
+def sign_message_entrypoint(message: str) -> Any:
     signature = ""
     # use the imported library here
     return signature
 
-def verify_message(message: str, signature: Any) -> bool:
+def verify_message_entrypoint(message: str, signature: Any) -> bool:
     is_valid = True
     # use the imported library here
     return is_valid
