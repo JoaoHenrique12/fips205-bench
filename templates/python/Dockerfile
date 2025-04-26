@@ -10,4 +10,4 @@ COPY main.py /app
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 
-CMD ["python", "main.py"]
+CMD ["./entrypoint.sh"]
