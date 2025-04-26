@@ -37,7 +37,7 @@ sudo chmod 444 lorem-*
       - Graph bytes input x time spend to Verify one Message
       - Graph bytes input x memory spend to Sign one Message
       - Graph bytes input x memory spend to Verify one Message
-    - Graph to Sign/Verify many messages, all messages are equals to [inputs/lorem-1M.txt](inputs/lorem-1M.txt)
+    - Graph to Sign/Verify many messages, all messages are equals to [inputs/lorem-100k.txt](inputs/lorem-100k.txt)
       - Graph N messages x time spend to Sign N Message
       - Graph N messages x time spend to Verify N Message
       - Graph N messages x memory spend to Sign N Message
