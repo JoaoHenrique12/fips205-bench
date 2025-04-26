@@ -1,12 +1,8 @@
 #!/bin/bash
 
-# bench memory
-## remove comented lines for bench_mem
-sed -i '/HACK: bench_mem/ s/^#//' main.py 
 
-## with different messages
+# env vars used on all tests
 
-export N_MESSAGES=1
 export MESSAGE_PATH_LIST=(
   "../../inputs/lorem-1k.txt"
   "../../inputs/lorem-10k.txt"
@@ -15,6 +11,16 @@ export MESSAGE_PATH_LIST=(
   "../../inputs/lorem-10M.txt"
   "../../inputs/lorem-100M.txt"
 )
+export N_MESSAGES_LIST=(10 100 1000)
+export MESSAGE_MANY_TESTS="../../inputs/lorem-100k.txt"
+
+# bench memory
+## remove comented lines for bench_mem
+sed -i '/HACK: bench_mem/ s/^#//' main.py 
+
+## with different messages
+
+export N_MESSAGES=1
 for MESSAGE_PATH in ${MESSAGE_PATH_LIST[@]}
 do
   export MESSAGE_PATH
@@ -23,8 +29,7 @@ done
 
 ## with diferent number of signatures/verifies
 
-export N_MESSAGES_LIST=(10 100 1000)
-export MESSAGE_PATH="../../inputs/lorem-100k.txt"
+export MESSAGE_PATH=$MESSAGE_MANY_TESTS
 for N_MESSAGES in ${N_MESSAGES_LIST[@]}
 do
   export N_MESSAGES
@@ -43,14 +48,6 @@ mv bench-mem*.csv bench_mem
 
 ## with different messages
 export N_MESSAGES=1
-export MESSAGE_PATH_LIST=(
-  "../../inputs/lorem-1k.txt"
-  "../../inputs/lorem-10k.txt"
-  "../../inputs/lorem-100k.txt"
-  "../../inputs/lorem-1M.txt"
-  "../../inputs/lorem-10M.txt"
-  "../../inputs/lorem-100M.txt"
-)
 for MESSAGE_PATH in ${MESSAGE_PATH_LIST[@]}
 do
   export MESSAGE_PATH
@@ -61,8 +58,7 @@ done
 
 ## with different messages
 
-export N_MESSAGES_LIST=(10 100 1000)
-export MESSAGE_PATH="../../inputs/lorem-100k.txt"
+export MESSAGE_PATH=$MESSAGE_MANY_TESTS
 for N_MESSAGES in ${N_MESSAGES_LIST[@]}
 do
   export N_MESSAGES
