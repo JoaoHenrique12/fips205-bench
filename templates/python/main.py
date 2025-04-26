@@ -35,7 +35,7 @@ def main():
 
     for _ in range(n_messages):
 #        snapshot_before_sign = tracemalloc.take_snapshot() #HACK: bench_mem
-        signature = sign_message(message)
+        signature = sign_message_entrypoint(message)
 #        snapshot_after_sign = tracemalloc.take_snapshot() #HACK: bench_mem
 
 #        stats_sign = snapshot_after_sign.compare_to(snapshot_before_sign, 'filename') #HACK: bench_mem
@@ -43,7 +43,7 @@ def main():
 #        total_memory_sign += memory_diff_sign #HACK: bench_mem
 
 #        snapshot_before_verify = tracemalloc.take_snapshot() #HACK: bench_mem
-        verify_message(message, signature)
+        verify_message_entrypoint(message, signature)
 #        snapshot_after_verify = tracemalloc.take_snapshot() #HACK: bench_mem
 
 #        stats_verify = snapshot_after_verify.compare_to(snapshot_before_verify, 'filename') #HACK: bench_mem
