@@ -4,15 +4,15 @@
 # env vars used on all tests
 
 export MESSAGE_PATH_LIST=(
-  "../../inputs/lorem-1k.txt"
-  "../../inputs/lorem-10k.txt"
-  "../../inputs/lorem-100k.txt"
-  "../../inputs/lorem-1M.txt"
-  "../../inputs/lorem-10M.txt"
-  "../../inputs/lorem-100M.txt"
+  "/inputs/lorem-1k.txt"
+  "/inputs/lorem-10k.txt"
+  "/inputs/lorem-100k.txt"
+  "/inputs/lorem-1M.txt"
+  "/inputs/lorem-10M.txt"
+  "/inputs/lorem-100M.txt"
 )
 export N_MESSAGES_LIST=(10 100 1000)
-export MESSAGE_MANY_TESTS="../../inputs/lorem-100k.txt"
+export MESSAGE_MANY_TESTS="/inputs/lorem-100k.txt"
 
 # bench memory
 ## remove comented lines for bench_mem
