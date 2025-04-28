@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY git-repository/ /app
 COPY main.py /app
+COPY entrypoint.sh /app
 
 # Install dependencies specified in requirements.txt
 # If a requirements.txt do not exists, this step will be skipped
