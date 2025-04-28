@@ -26,9 +26,12 @@ do
 
   if [ $list_implementation == "all" ]; then
     list_implementation=$(ls)
-
   else
-    valid_implementations=$(ls)
+    valid_implementations=$(ls | tr '\n' ' ')
+    if ! is_in_list "$list_implementation" "${valid_implementations[@]}"; then
+      echo "implementation <$list_implementation> is not in list [ ${valid_implementations[@]}]"
+      exit 1
+    fi
   fi
 
   for implementation in ${list_implementation[@]}
