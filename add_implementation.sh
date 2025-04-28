@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# Load variables
+source common_resources.sh
+
 
 if [ "$#" -ne 4 ]; then
   echo "Error: This script expects exactly four arguments."
   echo "Usage: add_implementation.sh algorithmName languageImplemented mainBranch gitRepositoryLink"
-  echo "-> algorithmName = ['lamport']"
-  echo "-> languageImplemented = ['python', 'golang']"
+  echo "-> algorithmName = [${valid_algorithms[@]}]"
+  echo "-> languageImplemented = [${valid_languages[@]}]"
   echo "-> mainBranch = ['main', 'master', 'any_other_branch_name']"
   echo "-> gitRepositoryLink = ['any_https_github_gitlab_link']"
   exit 1
@@ -18,24 +21,7 @@ mainBranch="$3"
 gitRepositoryLink="$4"
 
 
-# Function to check if a value exists in a list
-# Function to check if a value is in a list
-is_in_list() {
-  local value=$1
-  shift
-  local list=("$@")
-
-  for item in "${list[@]}"; do
-    if [[ "$item" == "$value" ]]; then
-      return 0  # Found
-    fi
-  done
-  return 1  # Not found
-}
-
 # Validate algorithmName
-valid_algorithms=("lamport")
-
 if is_in_list  "$algorithmName" "${valid_algorithms[@]}"; then
   echo "algorithm: $algorithmName"
 else
@@ -44,8 +30,6 @@ else
 fi
 
 # Validate languageImplemented
-valid_languages=("python" "golang")
-
 if is_in_list  "$languageImplemented" "${valid_languages[@]}"; then
   echo "language: $languageImplemented"
 else
