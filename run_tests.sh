@@ -47,16 +47,17 @@ do
     cd ..
     echo "------------------------------"
 
-    if [[ $last_version == $actual_version ]]; then
-      echo "tests not executed, last_version found on metadata.json is equal HEAD"
+    tag=$(echo "$implementation" | tr '[:upper:]' '[:lower:]')
+    tag="$tag-$actual_version"
+    mkdir "output-$tag/"
+    if [ $? -eq 1 ] ; then
+      echo "tests not executed, already found folder output-$tag"
+      echo "if you want run again this test to this hash consider"
+      echo "remove this folder or move it to another direcotry"
     else
       echo -e "Build tag\n"
-      # put hash on tag
-      tag=$(echo "$implementation" | tr '[:upper:]' '[:lower:]')
-      tag="$tag-$actual_version"
       docker build -t$tag .
       echo "------------------------------"
-      mkdir -p "output-$tag/"
       echo -e "Runing tests, it may take some time...\n"
       docker run --rm \
         -v "$root/inputs/:/inputs" \
@@ -66,6 +67,8 @@ do
       echo "New folder: output-$tag/"
       echo "------------------------------"
     fi
+
+    jq ".last_version = \"$actual_version\"" "metadata.json" > tmp.json && mv tmp.json "metadata.json"
 
     echo "=============================================================================================="
     cd ..

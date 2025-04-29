@@ -8,7 +8,7 @@ add:
 
 .PHONY: run
 run:
-	echo "run tests for one or more implementations"
+	./run_tests.sh $(lst_algo) $(lst_impl)
 
 .PHONY: digest
 digest:
