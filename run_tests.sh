@@ -36,7 +36,41 @@ do
 
   for implementation in ${list_implementation[@]}
   do
-    echo "$implementation"
+    cd $implementation
+    echo "==================== running $algorithmName for implementation $implementation ===================="
+    branch=$(cat metadata.json | jq .branch | tr -d '"')
+    last_version=$(cat metadata.json | jq .last_version | tr -d '"')
+
+    echo -e "Updating git-repository\n"
+    cd git-repository && git checkout $branch && git pull
+      actual_version=$(git rev-parse HEAD)
+    cd ..
+    echo "------------------------------"
+
+    if [[ $last_version == $actual_version ]]; then
+      echo "tests not executed, last_version found on metadata.json is equal HEAD"
+    else
+      echo -e "Build tag\n"
+      # put hash on tag
+      tag=$(echo "$implementation" | tr '[:upper:]' '[:lower:]')
+      tag="$tag-$actual_version"
+      docker build -t$tag .
+      echo "------------------------------"
+      mkdir -p "output-$tag/"
+      mkdir -p "output-$tag/bench_mem"
+      mkdir -p "output-$tag/bench_cpu"
+      echo -e "Runing tests, it may take some time...\n"
+      docker run --rm \
+        -v "$root/inputs/:/inputs" \
+        -v "$PWD/output-$tag/bench_mem/:/app/bench_mem/" \
+        -v "$PWD/output-$tag/bench_cpu/:/app/bench_cpu/" \
+        $tag
+
+      echo "------------------------------"
+    fi
+
+    echo "=============================================================================================="
+    cd ..
   done
 
   cd ../../

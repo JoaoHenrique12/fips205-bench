@@ -16,3 +16,4 @@ is_in_list() {
 export valid_algorithms=("lamport")
 export valid_languages=("python" "golang")
 export -f is_in_list
+export root=$(pwd)
