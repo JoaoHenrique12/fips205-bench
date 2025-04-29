@@ -57,15 +57,13 @@ do
       docker build -t$tag .
       echo "------------------------------"
       mkdir -p "output-$tag/"
-      mkdir -p "output-$tag/bench_mem"
-      mkdir -p "output-$tag/bench_cpu"
       echo -e "Runing tests, it may take some time...\n"
       docker run --rm \
         -v "$root/inputs/:/inputs" \
-        -v "$PWD/output-$tag/bench_mem/:/app/bench_mem/" \
-        -v "$PWD/output-$tag/bench_cpu/:/app/bench_cpu/" \
+        -v "$PWD/output-$tag/:/app/output_bench/" \
         $tag
 
+      echo "New folder: output-$tag/"
       echo "------------------------------"
     fi
 
