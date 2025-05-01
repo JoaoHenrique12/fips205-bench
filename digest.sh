@@ -39,7 +39,7 @@ do
       for output in ${output_list[@]}
       do
         cd $output
-        ./../../../../digest/python.sh
+        ./../../../../digest/python/main.sh
         cd ..
       done
       cd ..
