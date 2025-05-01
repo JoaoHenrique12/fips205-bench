@@ -78,8 +78,12 @@ if [[ $? -eq 0 ]]; then
     fi
   done
 
+  # cleaning temp files
+  ls | grep -Ev "^(sign|verify)" | xargs rm
+
   cd ../../
   # digest cpu
+  # ls
   # cp -r bench_cpu digest/cpu
   # cd digest/cpu
   # for digest_file in $(ls)
