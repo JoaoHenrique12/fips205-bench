@@ -16,7 +16,7 @@ list_algo_run=$1
 list_implementation=$2
 
 if [ $list_algo_run == "all" ]; then
-  list_algo_run=$valid_algorithms
+  list_algo_run=${valid_algorithms[@]}
 fi
 
 
