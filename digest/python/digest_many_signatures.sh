@@ -1,5 +1,18 @@
 #!/bin/bash
 
+if [ "$#" -ne 1 ]; then
+  echo "Error: This script expects exactly one argument."
+  echo "-> outputLabel = ['cpu', 'mem'] "
+  exit 1
+fi
+
+outputLabel="memory_used_bytes"
+
+if [[ $1 == "cpu" ]]; then
+  outputLabel="seconds_took"
+fi
+
+
 #TODO: remove me
 rm -rf sign_message-many_times.csv verify_message-many_times.csv
 
@@ -7,8 +20,8 @@ echo "creating files: sign_message-many_times.csv verify_message-many_times.csv"
 
 touch sign_message-many_times.csv
 touch verify_message-many_times.csv
-echo "input_messages_signed, memory_used_bytes" > sign_message-many_times.csv
-echo "input_messages_verified, memory_used_bytes" > verify_message-many_times.csv
+echo "input_messages_signed, $outputLabel" > sign_message-many_times.csv
+echo "input_messages_verified, $outputLabel" > verify_message-many_times.csv
 
 many_times_input_name="lorem-100k"
 many_message_file_list=$(ls | grep $many_times_input_name | sort -r)
