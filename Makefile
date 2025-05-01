@@ -12,7 +12,7 @@ run:
 
 .PHONY: digest
 digest:
-	echo "digest all missing files"
+	./digest.sh $(lst_algo) $(lst_lang)
 
 .PHONY: graph
 graph:
