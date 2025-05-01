@@ -10,8 +10,8 @@ if [[ $? -eq 0 ]]; then
   cp -r bench_mem digest/mem
 
   cd digest/mem
-    $root/digest/python/digest_mem_one_signature.sh
-    $root/digest/python/digest_mem_many_signatures.sh
+    $root/digest/python/digest_one_signature.sh
+    $root/digest/python/digest_many_signatures.sh
 
     ## cleaning temp files
     ls | grep -Ev "^(sign|verify)" | xargs rm
