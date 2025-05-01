@@ -7,18 +7,18 @@ echo "creating files: sign_message-one_time.csv verify_message-one_time.csv"
 
 touch sign_message-one_time.csv
 touch verify_message-one_time.csv
-echo "input_in_bytes, memory_used_in_bytes" > sign_message-one_time.csv
-echo "input_in_bytes, memory_used_in_bytes" > verify_message-one_time.csv
+echo "input_bytes, memory_used_bytes" > sign_message-one_time.csv
+echo "input_bytes, memory_used_bytes" > verify_message-one_time.csv
 
 one_message_file_list=$(ls | grep "\-1\.csv")
 
-regex_get_memory_input='^bench-mem-([a-zA-Z0-9_]+)-([0-9]+)([kM])-([0-9]+)\.csv$'
+regex_get_memory_input='^bench-(mem|cpu)-([a-zA-Z0-9_]+)-([0-9]+)([kM])-([0-9]+)\.csv$'
 
 for file in ${one_message_file_list[@]}
 do
   if [[ "$file" =~ $regex_get_memory_input ]]; then
-    number="${BASH_REMATCH[2]}"
-    prefix="${BASH_REMATCH[3]}"
+    number="${BASH_REMATCH[3]}"
+    prefix="${BASH_REMATCH[4]}"
 
     axis_x=0
     if [[ $prefix == 'k' ]]; then
