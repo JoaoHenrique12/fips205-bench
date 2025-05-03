@@ -16,4 +16,4 @@ digest:
 
 .PHONY: graph
 graph:
-	echo "create a graph for each digest"
+	echo ./graph.sh $(lst_algo) $(lst_lang)
