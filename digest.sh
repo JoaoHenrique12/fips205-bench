@@ -21,8 +21,6 @@ if [ $list_language_run == "all" ]; then
   list_language_run=${valid_languages[@]}
 fi
 
-export list_algo_run
-
 cd algorithms/
 
 for algorithm in ${list_algo_run[@]}
@@ -39,7 +37,7 @@ do
       for output in ${output_list[@]}
       do
         cd $output
-        ./../../../../digest/python/main.sh
+        ./../../../../digest/$language/main.sh
         cd ..
       done
       cd ..
