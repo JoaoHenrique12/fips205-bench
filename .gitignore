@@ -27,3 +27,8 @@ go.work.sum
 # specific for this repo
 
 git-repository/
+
+env/
+.venv/
+venv/
+*.png
