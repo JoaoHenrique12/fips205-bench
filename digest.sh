@@ -37,6 +37,11 @@ do
       for output in ${output_list[@]}
       do
         cd $output
+        if [[ $? -eq 1 ]]; then
+          echo "output folder not found, consider use: make run"
+          echo "$PWD"
+          continue
+        fi
         ./../../../../digest/$language/main.sh
         cd ..
       done
