@@ -1,6 +1,6 @@
 .PHONY: install
 install:
-	sudo apt install docker jq git
+	sudo apt install docker jq git python3-pip python3-venv
 
 .PHONY: add
 add:
