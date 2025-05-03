@@ -42,7 +42,7 @@ do
           echo "$PWD"
           continue
         fi
-        ./../../../../digest/$language/main.sh
+        $root/digest/$language/main.sh
         cd ..
       done
       cd ..
