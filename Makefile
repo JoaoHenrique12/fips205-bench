@@ -16,4 +16,4 @@ digest:
 
 .PHONY: graph
 graph:
-	echo ./graph.sh $(lst_algo) $(lst_lang)
+	./graph.sh $(lst_algo) $(lst_lang)
