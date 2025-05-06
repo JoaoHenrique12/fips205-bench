@@ -12,10 +12,6 @@ if [[ $1 == "cpu" ]]; then
   outputLabel="seconds_took"
 fi
 
-
-#TODO: remove me
-rm -rf sign_message-many_times.csv verify_message-many_times.csv
-
 echo "creating files: sign_message-many_times.csv verify_message-many_times.csv"
 
 touch sign_message-many_times.csv

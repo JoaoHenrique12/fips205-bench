@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#TODO: remove me
-rm -rf digest
-
 mkdir digest
 
 # digest mem

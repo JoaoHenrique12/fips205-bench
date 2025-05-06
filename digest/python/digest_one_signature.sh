@@ -13,9 +13,6 @@ if [[ $1 == "cpu" ]]; then
 fi
 
 
-#TODO: remove me
-rm -rf sign_message-one_time.csv verify_message-one_time.csv
-
 echo "creating files: sign_message-one_time.csv verify_message-one_time.csv"
 
 touch sign_message-one_time.csv
