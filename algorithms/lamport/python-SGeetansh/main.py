@@ -6,7 +6,7 @@ from ls import keygen, signgen, verification
 def sign_message_entrypoint(message: str) -> Any:
     keypair = keygen()
     signature = signgen(message, keypair[0])
-    return signature, keygen
+    return signature, keypair
 
 def verify_message_entrypoint(message: str, signature: Any, keypair: Any) -> bool:
     is_valid = verification(message, keypair[1], signature)
