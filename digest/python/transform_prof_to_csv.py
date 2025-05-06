@@ -14,8 +14,8 @@ def main(argv: list[str]):
 
     stats = p.get_stats_profile() 
 
-    tottime_sign_message = stats.func_profiles['sign_message_entrypoint'].tottime
-    tottime_verify_message = stats.func_profiles['verify_message_entrypoint'].tottime
+    tottime_sign_message = stats.func_profiles['sign_message_entrypoint'].cumtime
+    tottime_verify_message = stats.func_profiles['verify_message_entrypoint'].cumtime
 
     file_name = file_profile.split(".")[0]
     file_csv = file_name + '.csv'
