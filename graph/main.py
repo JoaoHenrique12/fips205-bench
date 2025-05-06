@@ -58,7 +58,7 @@ def main(csv_file, prefix_title):
     # Graph infos
 
     ## title
-    prefix = "Memory usage:" if prefix_title == 'mem' else "Processor usage:"
+    prefix = "Memory usage:" if prefix_title == 'mem' else "Time usage:"
     sufix = csv_file.split(".")[0] # remove extension
     sufix = ' '.join([v.capitalize() for v in sufix.split('-')])
     sufix = ' '.join([v.capitalize() for v in sufix.split('_')])
