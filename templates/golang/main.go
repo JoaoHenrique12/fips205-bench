@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+	pprof "runtime/pprof"
+	"runtime"
 	"strconv"
 )
 
@@ -46,5 +48,20 @@ func main() {
 	for i := 0; i < nMessages; i++ {
 		signature := signMessageEntrypoint(message)
 		verifyMessageEntrypoint(message, signature)
+		_ = signature
+	}
+
+	// Capture memory profile
+	f, err := os.Create("bench-mem-{input_name}-{n_messages}.prof")
+	if err != nil {
+		fmt.Println("could not create memory profile: ", err)
+		os.Exit(1)
+	}
+	defer f.Close()
+
+	runtime.GC()
+	if err := pprof.WriteHeapProfile(f); err != nil {
+		fmt.Println("could not write memory profile: ", err)
+		os.Exit(1)
 	}
 }
