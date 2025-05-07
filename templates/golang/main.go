@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
-	pprof "runtime/pprof"
+	"path/filepath"
+	"runtime/pprof"
 	"runtime"
 	"strconv"
 )
@@ -51,8 +52,11 @@ func main() {
 		_ = signature
 	}
 
-	// Capture memory profile
-	f, err := os.Create("bench-mem-{input_name}-{n_messages}.prof")
+	inputName := filepath.Base(messagePath)
+	inputName = inputName[:len(inputName)-len(filepath.Ext(inputName))]
+	fileName := fmt.Sprintf("bench-mem-%s-%d.prof", inputName, nMessages)
+
+	f, err := os.Create(fileName)
 	if err != nil {
 		fmt.Println("could not create memory profile: ", err)
 		os.Exit(1)
