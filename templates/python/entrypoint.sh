@@ -11,7 +11,7 @@ export MESSAGE_PATH_LIST=(
   "/inputs/lorem-10M.txt"
   "/inputs/lorem-100M.txt"
 )
-export N_MESSAGES_LIST=(10 100 1000)
+export N_MESSAGES_LIST=(10 100 300 500 700 1000)
 export MESSAGE_MANY_TESTS="/inputs/lorem-100k.txt"
 
 mkdir -p output_bench
