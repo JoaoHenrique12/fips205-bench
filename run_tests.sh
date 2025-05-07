@@ -62,6 +62,8 @@ do
       docker run --rm \
         -v "$root/inputs/:/inputs" \
         -v "$PWD/output-$tag/:/app/output_bench/" \
+        --memory=1g \
+        --cpus=1 \
         $tag
 
       echo "New folder: output-$tag/"
