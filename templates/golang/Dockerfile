@@ -1,4 +1,4 @@
-FROM golang:1.21-alpine3.19 AS builder
+FROM golang:1.24.3-alpine3.20 AS builder
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ RUN go build -o main .
 
 
 # Create a minimal image
-FROM alpine:3.19
+FROM debian:bookworm-slim
 
 WORKDIR /app
 
@@ -31,6 +31,8 @@ COPY --from=builder /app/entrypoint.sh /app/entrypoint.sh
 RUN adduser --system --uid 1000 --group testuser
 
 RUN chown -R testuser:testuser /app
+
+RUN chmod +x entrypoint.sh
 
 USER testuser
 
