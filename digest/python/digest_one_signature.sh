@@ -22,11 +22,11 @@ echo "input_bytes, $outputLabel" > verify_message-one_time.csv
 
 one_message_file_list=$(ls | grep "\-1\.csv")
 
-regex_get_memory_input='^bench-(mem|cpu)-([a-zA-Z0-9_]+)-([0-9]+)([kM])-([0-9]+)\.csv$'
+regex_get_memory_or_cpu_input='^bench-(mem|cpu)-([a-zA-Z0-9_]+)-([0-9]+)([kM])-([0-9]+)\.csv$'
 
 for file in ${one_message_file_list[@]}
 do
-  if [[ "$file" =~ $regex_get_memory_input ]]; then
+  if [[ "$file" =~ $regex_get_memory_or_cpu_input ]]; then
     number="${BASH_REMATCH[3]}"
     prefix="${BASH_REMATCH[4]}"
 
@@ -45,6 +45,6 @@ do
     echo "$axis_x , $axis_y_verify" >> verify_message-one_time.csv
 
   else
-    echo "error retrieving amount of memory input from file; file=$file, regex=$regex_get_memory_input"
+    echo "error retrieving amount of memory input from file; file=$file, regex=$regex_get_memory_or_cpu_input"
   fi
 done
