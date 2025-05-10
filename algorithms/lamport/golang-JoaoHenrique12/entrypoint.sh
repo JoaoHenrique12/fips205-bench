@@ -13,9 +13,6 @@ export MESSAGE_PATH_LIST=(
 export N_MESSAGES_LIST=(10 100 300 500 700 1000)
 export MESSAGE_MANY_TESTS="/inputs/lorem-100k.txt"
 
-ls
-pwd
-
 mkdir -p output_bench
 
 # bench memory
