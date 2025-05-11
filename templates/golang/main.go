@@ -7,6 +7,7 @@ import (
 	"runtime"
 	"runtime/pprof"
 	"strconv"
+	"time"
 )
 
 func signMessageEntrypoint(message string) string {
@@ -47,9 +48,55 @@ func main() {
 		defer pprof.StopCPUProfile()
 	}
 
-	for i := 0; i < nMessages; i++ {
-		signature := signMessageEntrypoint(message)
-		verifyMessageEntrypoint(message, signature)
+	csvFileName := profilingFileName[:len(profilingFileName)-len(filepath.Ext(profilingFileName))] + ".csv"
+	csvFile, err := os.Create(csvFileName)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "could not create csv file called %s: %v\n", csvFileName, err)
+		os.Exit(1)
+	}
+	defer csvFile.Close()
+
+
+	if profilingType == "cpu" {
+		var time_sign_message time.Duration
+		var time_verify_message time.Duration
+		var start time.Time
+
+		for i := 0; i < nMessages; i++ {
+			start = time.Now()
+
+			signature := signMessageEntrypoint(message)
+
+			time_sign_message += time.Since(start)
+
+			start = time.Now()
+
+			verifyMessageEntrypoint(message, signature)
+
+			time_verify_message += time.Since(start)
+		}
+
+		csvFile.WriteString(fmt.Sprintf("sign_message, %d\n", uint(time_sign_message.Seconds())))
+		csvFile.WriteString(fmt.Sprintf("verify_message, %d\n", uint(time_verify_message.Seconds())))
+	} else {
+		var m runtime.MemStats
+		var max_bytes_sign uint64
+		var max_bytes_verify uint64
+
+		max_bytes_sign = 0
+		max_bytes_verify = 0
+
+		for i := 0; i < nMessages; i++ {
+			signature := signMessageEntrypoint(message)
+			runtime.ReadMemStats(&m)
+		  max_bytes_sign = max(max_bytes_sign, m.Alloc)
+
+			verifyMessageEntrypoint(message, signature)
+			runtime.ReadMemStats(&m)
+		  max_bytes_verify = max(max_bytes_verify, m.Alloc)
+		}
+		csvFile.WriteString(fmt.Sprintf("sign_message, %v\n", max_bytes_sign))
+		csvFile.WriteString(fmt.Sprintf("verify_message, %v\n", max_bytes_sign))
 	}
 
 	if profilingType == "mem" {
@@ -60,7 +107,6 @@ func main() {
 		}
 		defer memFile.Close()
 
-		runtime.GC()
 		if err := pprof.WriteHeapProfile(memFile); err != nil {
 			fmt.Println("could not write memory profile: ", err)
 			os.Exit(1)
@@ -101,4 +147,11 @@ func getProfilingOutputName(messagePath string, nMessages int, profilingType str
 	fileName := fmt.Sprintf("bench-%s-%s-%d.prof", profilingType, inputName, nMessages)
 
 	return fileName
+}
+
+func max(a, b uint64) uint64 {
+	if a > b {
+		return a
+	}
+	return b
 }
