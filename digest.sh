@@ -5,8 +5,8 @@ source common_resources.sh
 if [ "$#" -ne 2 ]; then
   echo "Error: This script expects exactly two arguments."
   echo "Usage: digest.sh algorithmName language"
-  echo "-> algorithmName = [${valid_algorithms[@]}], accept value 'all'"
-  echo "-> language = [${valid_languages[@]}], accept value 'all'"
+  echo "-> lst_algo = [${valid_algorithms[@]}], accept value 'all'"
+  echo "-> lst_lang = [${valid_languages[@]}], accept value 'all'"
   exit 1
 fi
 

@@ -6,8 +6,8 @@ source common_resources.sh
 if [ "$#" -ne 2 ]; then
   echo "Error: This script expects exactly two arguments."
   echo "Usage: run_tests.sh algorithmName implementation"
-  echo "-> algorithmName = [${valid_algorithms[@]}], accept value 'all'"
-  echo "-> implementation = '[some-language]-[some-github-user]' i.e. 'python-SGeetansh', accept value 'all'"
+  echo "-> lst_algo = [${valid_algorithms[@]}], accept value 'all'"
+  echo "-> lst_impl = '[some-language]-[some-github-user]' i.e. 'python-SGeetansh', accept value 'all'"
   exit 1
 fi
 
