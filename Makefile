@@ -1,7 +1,8 @@
 .PHONY: install
 install:
-	sudo apt install docker jq git python3-pip python3-venv
-
+	sudo apt install docker.io jq git python3-pip python3-venv
+	sudo usermod -aG docker $USER
+	echo "reboot or your machine"
 .PHONY: add
 add:
 	./add_implementation.sh $(algo) $(lang) $(branch) $(link)
