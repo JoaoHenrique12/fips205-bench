@@ -8,30 +8,28 @@ import (
 	"runtime/pprof"
 	"strconv"
 	"time"
+	"github.com/joaohenrique12/fips205/lamport"
 )
 
-func signMessageEntrypoint(message string) string {
-	signature := ""
-	// use the imported library here
+func signMessageEntrypoint(message []byte) lamport.Signarute {
+	signer := lamport.LamportBuilder("SHA256", 32)
+	signature := signer.SignMessage(message)
 	return signature
 }
 
-func verifyMessageEntrypoint(message string, signature string) bool {
-	isValid := true
-	// use the imported library here
-	return isValid
+func verifyMessageEntrypoint(message []byte, signature lamport.Signarute) bool {
+	return lamport.ValidateSignature(message, "SHA256", signature)
 }
 
 func main() {
 	messagePath, nMessages, profilingType := readEnvVars()
 	profilingFileName := getProfilingOutputName(messagePath, nMessages, profilingType)
 
-	messageBytes, err := os.ReadFile(messagePath)
+	message, err := os.ReadFile(messagePath)
 	if err != nil {
 		fmt.Printf("Error reading message file: %v\n", err)
 		os.Exit(1)
 	}
-	message := string(messageBytes)
 
 	if profilingType == "cpu" {
 		cpuFile, err := os.Create(profilingFileName)

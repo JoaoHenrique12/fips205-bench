@@ -33,7 +33,7 @@ def plot_csv_data(csv_filepath, x_column, y_column, title="Data Plot", x_label="
 
         if x_data and y_data:
             plt.figure(figsize=(8, 6))
-            plt.plot(x_data, y_data, marker='o', linestyle='-', color='blue')
+            plt.plot(x_data, y_data, marker='o', linestyle='', color='blue')
             plt.title(title)
             plt.xlabel(x_label)
             plt.ylabel(y_label)

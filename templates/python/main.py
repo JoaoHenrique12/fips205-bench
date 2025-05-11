@@ -4,10 +4,11 @@ from typing import Any
 
 def sign_message_entrypoint(message: str) -> Any:
     signature = ""
+    public_key = ""
     # use the imported library here
-    return signature
+    return signature, public_key
 
-def verify_message_entrypoint(message: str, signature: Any) -> bool:
+def verify_message_entrypoint(message: str, signature: Any, public_key: Any) -> bool:
     is_valid = True
     # use the imported library here
     return is_valid
@@ -35,7 +36,7 @@ def main():
 
     for _ in range(n_messages):
 #        snapshot_before_sign = tracemalloc.take_snapshot() #HACK: bench_mem
-        signature = sign_message_entrypoint(message)
+        signature, public_key = sign_message_entrypoint(message)
 #        snapshot_after_sign = tracemalloc.take_snapshot() #HACK: bench_mem
 
 #        stats_sign = snapshot_after_sign.compare_to(snapshot_before_sign, 'filename') #HACK: bench_mem
@@ -43,7 +44,7 @@ def main():
 #        total_memory_sign += memory_diff_sign #HACK: bench_mem
 
 #        snapshot_before_verify = tracemalloc.take_snapshot() #HACK: bench_mem
-        verify_message_entrypoint(message, signature)
+        verify_message_entrypoint(message, signature, public_key)
 #        snapshot_after_verify = tracemalloc.take_snapshot() #HACK: bench_mem
 
 #        stats_verify = snapshot_after_verify.compare_to(snapshot_before_verify, 'filename') #HACK: bench_mem

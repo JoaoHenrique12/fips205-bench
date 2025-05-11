@@ -38,9 +38,9 @@ do
     else
       echo "error unidentified prefix, valid prefixes are [kM]"
     fi
+
     axis_y_sign=$(cat $file | grep sign_message | awk '{print $2}')
     axis_y_verify=$(cat $file | grep verify | awk '{print $2}')
-
     echo "$axis_x , $axis_y_sign" >> sign_message-one_time.csv
     echo "$axis_x , $axis_y_verify" >> verify_message-one_time.csv
 
