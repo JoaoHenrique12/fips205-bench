@@ -20,9 +20,9 @@ touch verify_message-one_time.csv
 echo "input_bytes, $outputLabel" > sign_message-one_time.csv
 echo "input_bytes, $outputLabel" > verify_message-one_time.csv
 
-one_message_file_list=$(ls | grep "\-1\.prof")
+one_message_file_list=$(ls | grep "\-1\.csv")
 
-regex_get_memory_or_cpu_input='^bench-(mem|cpu)-([a-zA-Z0-9_]+)-([0-9]+)([kM])-([0-9]+)\.prof$'
+regex_get_memory_or_cpu_input='^bench-(mem|cpu)-([a-zA-Z0-9_]+)-([0-9]+)([kM])-([0-9]+)\.csv$'
 
 for file in ${one_message_file_list[@]}
 do
@@ -39,35 +39,10 @@ do
       echo "error unidentified prefix, valid prefixes are [kM]"
     fi
 
-    if [[ $1 == "mem" ]]; then
-      line=$(go tool pprof -top $file | grep "Showing nodes accounting for")
-      regex_get_memory_output='([0-9]+\.[0-9]+)([kM])B'
-      if [[ "$line" =~ $regex_get_memory_output ]]; then
-        number="${BASH_REMATCH[1]}"
-        prefix="${BASH_REMATCH[2]}"
-        axis_y=0
-        if [[ $prefix == 'k' ]]; then
-          axis_y=$(echo "$number * 1024" | bc)
-        elif [[ $prefix == 'M' ]]; then
-          axis_y=$(echo "$number * 1024 * 1024" | bc)
-        else
-          echo "error unidentified prefix, valid prefixes are [kM]"
-        fi
-      fi
-
-      echo "$axis_x , $axis_y" >> sign_message-one_time.csv
-      echo "$axis_x , $axis_y" >> verify_message-one_time.csv
-    else
-      axis_y_sign="0"
-      axis_y_verify="0"
-      echo $file
-
-      go tool pprof $file
-      break
-
-      echo "$axis_x , $axis_y_sign" >> sign_message-one_time.csv
-      echo "$axis_x , $axis_y_verify" >> verify_message-one_time.csv
-    fi
+    axis_y_sign=$(cat $file | grep sign_message | awk '{print $2}')
+    axis_y_verify=$(cat $file | grep verify | awk '{print $2}')
+    echo "$axis_x , $axis_y_sign" >> sign_message-one_time.csv
+    echo "$axis_x , $axis_y_verify" >> verify_message-one_time.csv
 
   else
     echo "error retrieving amount of memory input from file; file=$file, regex=$regex_get_memory_or_cpu_input"

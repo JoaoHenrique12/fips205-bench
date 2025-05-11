@@ -7,7 +7,7 @@ mkdir digest
 cp -r bench_mem digest/mem
 
 cd digest/mem
-  # $root/digest/golang/digest_one_signature.sh "mem"
+  $root/digest/golang/digest_one_signature.sh "mem"
   # $root/digest/golang/digest_many_signatures.sh "mem"
 
   ## cleaning temp files
@@ -17,7 +17,6 @@ cd ../../
 # digest cpu
 cp -r bench_cpu digest/cpu
 cd digest/cpu
-
   $root/digest/golang/digest_one_signature.sh "cpu"
   # $root/digest/python/digest_many_signatures.sh "cpu"
 
