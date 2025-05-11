@@ -25,7 +25,7 @@ func main() {
 	messagePath, nMessages, profilingType := readEnvVars()
 	profilingFileName := getProfilingOutputName(messagePath, nMessages, profilingType)
 
-	messageBytes, err := os.ReadFile(messagePath)
+	message, err := os.ReadFile(messagePath)
 	if err != nil {
 		fmt.Printf("Error reading message file: %v\n", err)
 		os.Exit(1)
@@ -63,13 +63,13 @@ func main() {
 		for i := 0; i < nMessages; i++ {
 			start = time.Now()
 
-			signature := signMessageEntrypoint(messageBytes)
+			signature := signMessageEntrypoint(message)
 
 			time_sign_message += time.Since(start)
 
 			start = time.Now()
 
-			verifyMessageEntrypoint(messageBytes, signature)
+			verifyMessageEntrypoint(message, signature)
 
 			time_verify_message += time.Since(start)
 		}
