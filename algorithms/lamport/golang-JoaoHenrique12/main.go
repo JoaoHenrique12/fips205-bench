@@ -74,8 +74,11 @@ func main() {
 			time_verify_message += time.Since(start)
 		}
 
-		csvFile.WriteString(fmt.Sprintf("sign_message, %d\n", uint(time_sign_message.Seconds())))
-		csvFile.WriteString(fmt.Sprintf("verify_message, %d\n", uint(time_verify_message.Seconds())))
+		converted_seconds_sign := float64(time_sign_message.Milliseconds())/1000.0
+		converted_seconds_verify := float64(time_verify_message.Milliseconds())/1000.0
+
+		csvFile.WriteString(fmt.Sprintf("sign_message, %.2f\n", converted_seconds_sign))
+		csvFile.WriteString(fmt.Sprintf("verify_message, %.2f\n", converted_seconds_verify))
 	} else {
 		var m runtime.MemStats
 		var max_bytes_sign uint64
