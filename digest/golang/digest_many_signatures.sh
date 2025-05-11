@@ -20,7 +20,7 @@ echo "input_messages_signed, $outputLabel" > sign_message-many_times.csv
 echo "input_messages_verified, $outputLabel" > verify_message-many_times.csv
 
 many_times_input_name="lorem-100k"
-many_message_file_list=$(ls | grep .csv | grep $many_times_input_name)
+many_message_file_list=$(ls | grep $many_times_input_name)
 regex_get_n_messages_input='^bench-(mem|cpu)-([a-zA-Z0-9_]+)-([0-9]+)([kM])-([0-9]+)\.csv$'
 
 for file in ${many_message_file_list[@]}

@@ -4,7 +4,7 @@ rm digest -rf
 mkdir digest
 
 # digest mem
-cp -r bench_mem digest/mem
+cp -r bench_mem/csv digest/mem
 
 cd digest/mem
   $root/digest/golang/digest_one_signature.sh "mem"
@@ -15,7 +15,7 @@ cd digest/mem
 cd ../../
 
 # digest cpu
-cp -r bench_cpu digest/cpu
+cp -r bench_cpu/csv digest/cpu
 cd digest/cpu
   $root/digest/golang/digest_one_signature.sh "cpu"
   $root/digest/golang/digest_many_signatures.sh "cpu"
