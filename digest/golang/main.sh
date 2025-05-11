@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#TODO: remove me
 rm digest -rf
 mkdir digest
 
