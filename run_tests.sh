@@ -40,9 +40,18 @@ do
     echo "==================== running $algorithmName for implementation $implementation ===================="
     branch=$(cat metadata.json | jq .branch | tr -d '"')
     last_version=$(cat metadata.json | jq .last_version | tr -d '"')
+    git_link=$(cat metadata.json | jq .git_link | tr -d '"')
 
-    echo -e "Updating git-repository\n"
-    cd git-repository && git checkout $branch && git pull
+    echo -e "Updating or creating git-repository\n"
+    cd git-repository 
+    if [[ "$?" == 1 ]]; then
+      echo "Creating repository"
+      git clone $git_link git-repository/
+      cd git-repository && git checkout $branch && git pull
+    else
+      echo "Updating repository"
+      git checkout $branch && git pull
+    fi
       actual_version=$(git rev-parse HEAD)
     cd ..
     echo "------------------------------"
